@@ -20,11 +20,13 @@
 
         // Prevent number argument containing 0
         if (!digit_sequence_array.includes("0")) {
+
           // Flag variable that remains true unless an invalid move is detected
           let is_pass = true;
 
           // Iterate over array created from number argument
           for (let i = 0; i < digit_sequence_array.length; i++) {
+
             // Handling to prevent out of bounds evaluation
             if (i !== digit_sequence_array.length - 1) {
               if (
@@ -53,6 +55,7 @@
         }
 
         function is_valid_move(chess_board, from_value, to_value) {
+
           let break_check_1 = false;
 
           let from_row_index = null;
@@ -61,10 +64,13 @@
 
           // Search the chess board for the matching from value
           for (var i = 0; i < chess_board.length; i++) {
+
             let row = chess_board[i];
 
             for (let j = 0; j < row.length; j++) {
+
               if (from_value == row[j]) {
+                
                 from_row_index = i;
 
                 from_col_index = j;
@@ -95,11 +101,16 @@
         }
       }
 
-      rook_traversal(45632589);
+      rook_traversal(45632589); // 45632589
 
-      rook_traversal(4578621);
+      rook_traversal(4578621); // INVALID MOVE
 
-      rook_traversal(10);
+      rook_traversal(10); // INVALID ARGUMENT - Digital sequence argument cannot contain 0
+
+      rook_traversal(135); // INVALID MOVE
+
+      rook_traversal(13978217); // 13978217
+
     </script>
   </body>
 </html>
