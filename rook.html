@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rook.js</title>
+  </head>
+  <body>
+    <script>
+      function rook_traversal(digit_sequence) {
+        const chess_board = [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+        ];
+
+        // Convert number argument to array
+        let digit_sequence_array = digit_sequence.toString().split("");
+
+        // Prevent number argument containing 0
+        if (!digit_sequence_array.includes("0")) {
+          // Flag variable that remains true unless an invalid move is detected
+          let is_pass = true;
+
+          // Iterate over array created from number argument
+          for (let i = 0; i < digit_sequence_array.length; i++) {
+            // Handling to prevent out of bounds evaluation
+            if (i !== digit_sequence_array.length - 1) {
+              if (
+                // Nested helper function that evaluates the validity of the digit sequence
+                !is_valid_move(
+                  chess_board,
+                  digit_sequence_array[i],
+                  digit_sequence_array[i + 1]
+                )
+              ) {
+                is_pass = false;
+              }
+            }
+          }
+
+          // Final output
+          if (is_pass) {
+            console.log(digit_sequence);
+          } else {
+            console.log("INVALID MOVE");
+          }
+        } else {
+          console.log(
+            "INVALID ARGUMENT - Digital sequence argument cannot contain 0"
+          );
+        }
+
+        function is_valid_move(chess_board, from_value, to_value) {
+          let break_check_1 = false;
+
+          let from_row_index = null;
+
+          let from_col_index = null;
+
+          // Search the chess board for the matching from value
+          for (var i = 0; i < chess_board.length; i++) {
+            let row = chess_board[i];
+
+            for (let j = 0; j < row.length; j++) {
+              if (from_value == row[j]) {
+                from_row_index = i;
+
+                from_col_index = j;
+
+                // Flag variable to break out of outer loop once the from value is identified
+                break_check_1 = true;
+
+                break;
+              }
+            }
+
+            if (break_check_1) break;
+          }
+
+          let from_row = chess_board[from_row_index];
+
+          var from_col = chess_board.map(function (row, i) {
+            return row[from_col_index];
+          });
+
+          //   Effectively evaluates whether the rook has moved in a permitted horizontal or vertical direction
+          if (
+            from_row.includes(parseInt(to_value)) ||
+            from_col.includes(parseInt(to_value))
+          ) {
+            return true;
+          }
+        }
+      }
+
+      rook_traversal(45632589);
+
+      rook_traversal(4578621);
+
+      rook_traversal(10);
+    </script>
+  </body>
+</html>
